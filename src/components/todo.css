@@ -1,0 +1,30 @@
+.todo{
+    margin-left: 30px;
+}
+.todo-container{
+    align-items: center;
+}
+li{
+    display: flex;
+    align-items: center;
+}
+#tasks{
+    margin-left: auto;
+    margin-right: auto;
+    /* text-overflow: hidden; */
+}
+#tasks td, th{
+    border: 1px solid #ddd;
+    padding: 8px;
+    min-width: 200px;
+    max-width: 400px;
+}
+#tasks tr:nth-child(even){ background-color: #f2f2f2;}
+#tasks tr:hover{background-color: #ddd;}
+#tasks th{
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #04AA6D;
+    color: white;
+}
