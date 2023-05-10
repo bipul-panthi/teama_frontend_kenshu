@@ -4,7 +4,9 @@ import "./todo.css";
 
 function Todo() {
   const [todo, setTodo] = useState<string>("");
-  const [todoList, setTodoList] = useState<Task[]>([]);
+  const [todoList, setTodoList] = useState<Task[]>(
+    JSON.parse(localStorage.getItem("lists") || "[]")
+  );
   const [filter, setFilter] = useState("all");
 
   useEffect(() => {
@@ -39,8 +41,11 @@ function Todo() {
 
     setTodoList([...todoList, newTodo]);
     setTodo("");
-    localStorage.setItem("lists", JSON.stringify([...todoList, newTodo]));
   };
+
+  useEffect(() => {
+    localStorage.setItem("lists", JSON.stringify(todoList));
+  }, [todoList]);
 
   const changeStatus = (index: number) => {
     const taskList = [...todoList];
@@ -52,6 +57,12 @@ function Todo() {
 
     setTodoList(taskList);
     localStorage.setItem("lists", JSON.stringify(todoList));
+  };
+
+  const handleDelete = (index: number) => {
+    const taskList = [...todoList];
+    taskList.splice(index, 1);
+    setTodoList(taskList);
   };
 
   const todoListItems = todoList
@@ -68,6 +79,14 @@ function Todo() {
             type="checkbox"
             checked={task.status === "complete"}
             onChange={() => changeStatus(index)}
+          />
+        </td>
+        <td>
+          <input
+            type="button"
+            value="Delete"
+            id="delete-btn"
+            onClick={() => handleDelete(index)}
           />
         </td>
       </tr>
@@ -125,6 +144,7 @@ function Todo() {
             <th>Task</th>
             <th>Status</th>
             <th>Checkbox</th>
+            <th>Delete</th>
           </tr>
         </thead>
         <tbody>{todoListItems}</tbody>

@@ -28,3 +28,11 @@ li{
     background-color: #04AA6D;
     color: white;
 }
+#delete-btn{
+    background-color: red;
+    border: 2px solid red;
+    padding: 5px;
+    border-radius: 5px;
+    color: white;
+    font-weight: 600;
+}
